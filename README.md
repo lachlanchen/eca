@@ -21,9 +21,8 @@ The model operates on several mathematical principles, including:
 
 To use this model, you need to have PyTorch installed in your environment. You can then clone this repository and run the model with your own data by modifying the data loading part of the script.
 
-```
-bashCopy code
-git clone https://github.com/yourusername/eca.git
+```bash
+git clone https://github.com/lachlanchen/eca.git
 cd eca
 python model.py
 ```
