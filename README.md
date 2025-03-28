@@ -8,8 +8,8 @@ This package provides a scikit-learn compatible implementation of Eigencomponent
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/eigen_analysis.git
-cd eigen_analysis
+git clone https://github.com/lachlanchen/eca.git
+cd eca/eigen_analysis
 
 # Install in development mode
 pip install -e .
