@@ -2,9 +2,9 @@ Metadata-Version: 2.1
 Name: eigen-analysis
 Version: 0.1.0
 Summary: Eigencomponent Analysis for classification and clustering
-Home-page: https://github.com/yourusername/eigen_analysis
-Author: Your Name
-Author-email: your.email@example.com
+Home-page: https://github.com/lachlanchen/eigen_analysis
+Author: Lachlan Chen
+Author-email: lach@lazying。art
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent

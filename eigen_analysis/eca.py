@@ -65,14 +65,14 @@ class ECAModel(nn.Module):
         P_norm = P #/ torch.norm(P, dim=0, keepdim=True).detach()
         # Transform input (already unit normalized)
         psi = X @ P_norm  # Shape: [n_samples, input_dim]
-        psi_sq = psi ** 2  # Element-wise square
+        prob = psi ** 2  # Element-wise square
         # Compute L using sigmoid
         L = torch.sigmoid(self.temp * self.L_raw)
         # Apply STE to binarize L
         L_hard = (L >= 0.5).float()
         L = (L_hard - L).detach() + L
         # Compute class scores
-        class_scores = psi_sq @ L  # Shape: [n_samples, num_clusters]
+        class_scores = prob @ L  # Shape: [n_samples, num_clusters]
         return class_scores, P_norm, L, A
 
 
@@ -96,7 +96,7 @@ class ECA(BaseEigenAnalysis):
         Device to use for computation ('cpu' or 'cuda').
     """
     
-    def __init__(self, num_clusters=None, learning_rate=0.01, num_epochs=10000, 
+    def __init__(self, num_clusters=None, learning_rate=0.01, num_epochs=1000, 
                  temp=10.0, random_state=None, device=None):
         super().__init__(
             num_clusters=num_clusters,
