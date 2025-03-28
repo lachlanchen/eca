@@ -1,6 +1,6 @@
 # Eigen Analysis
 
-A Python package for Eigencomponent Analysis (ECA) and Unsupervised Eigencomponent Analysis (UECA) for classification and clustering tasks. ECA is a quantum theory-inspired linear model that provides interpretable feature-to-class mappings through eigencomponents.
+A Python package for Eigen-component Analysis (ECA) and Unsupervised Eigen-component Analysis (UECA) for classification and clustering tasks. ECA is a quantum theory-inspired linear model that provides interpretable feature-to-class mappings through eigen-components.
 
 
 ## Features
