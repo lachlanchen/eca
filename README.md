@@ -1,12 +1,12 @@
 # Eigen Analysis
 
-A Python package for Eigen-component Analysis (ECA) and Unsupervised Eigen-component Analysis (UECA) for classification and clustering tasks. ECA is a quantum theory-inspired linear model that provides interpretable feature-to-class mappings through eigen-components.
+A Python package for Eigen-Component Analysis (ECA) and Unsupervised Eigen-Component Analysis (uECA) for classification and clustering tasks. ECA is a quantum theory-inspired linear model that provides interpretable feature-to-class mappings through eigenomponents.
 
 
 ## Features
 
 - **Scikit-learn Compatible**: Implements the scikit-learn Estimator API with `fit`, `transform`, and `predict` methods
-- **Supervised & Unsupervised Learning**: Supports both classification (ECA) and clustering (UECA) modes
+- **Supervised & Unsupervised Learning**: Supports both classification (ECA) and clustering (uECA) modes
 - **GPU Acceleration**: PyTorch backend enables GPU acceleration when available
 - **Visualization Tools**: Built-in methods to visualize eigenfeatures, mappings, and results
 - **Mathematical Foundation**: Based on quantum theory principles with antisymmetric transformation matrices
@@ -193,7 +193,7 @@ visualize_mnist_eigenfeatures(eca.model_, output_dir='mnist_results')
 
 - `num_clusters`: Number of classes
 - `learning_rate`: Learning rate for optimizer (default: 0.01)
-- `num_epochs`: Number of training epochs (default: 10000)
+- `num_epochs`: Number of training epochs (default: 1000)
 - `temp`: Temperature parameter for sigmoid (default: 10.0)
 - `random_state`: Random seed for reproducibility
 - `device`: Device to use ('cpu' or 'cuda')

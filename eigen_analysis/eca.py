@@ -8,6 +8,73 @@ from .base import BaseEigenAnalysis
 from .utils import cosine_similarity_matrix, compute_loss
 
 
+# class ECAModel(nn.Module):
+#     """Neural network model for Eigencomponent Analysis.
+    
+#     This implements the core ECA architecture with trainable parameters
+#     for the antisymmetric matrix A and mapping matrix L.
+    
+#     Parameters
+#     ----------
+#     input_dim : int
+#         Dimensionality of the input features.
+#     num_clusters : int
+#         Number of clusters/classes.
+#     temp : float, default=10.0
+#         Temperature parameter for sigmoid.
+#     """
+    
+#     def __init__(self, input_dim, num_clusters, temp=10.0):
+#         super(ECAModel, self).__init__()
+#         # A_raw is a trainable parameter of size [input_dim, input_dim]
+#         self.A_raw = nn.Parameter(torch.zeros(input_dim, input_dim))
+#         # D is a trainable diagonal matrix
+#         self.D = nn.Parameter(torch.zeros(input_dim))
+#         # L_raw is a trainable parameter of size [input_dim, num_clusters]
+#         self.L_raw = nn.Parameter(torch.zeros(input_dim, num_clusters))
+
+#         self.num_parameters = input_dim * (input_dim + 1) / 2 + input_dim + input_dim * num_clusters
+#         self.temp = temp
+
+#     def forward(self, X):
+#         """Forward pass through the model.
+        
+#         Parameters
+#         ----------
+#         X : torch.Tensor of shape (n_samples, input_dim)
+#             Input data.
+            
+#         Returns
+#         -------
+#         class_scores : torch.Tensor of shape (n_samples, num_clusters)
+#             Class scores for each sample.
+#         P_norm : torch.Tensor of shape (input_dim, input_dim)
+#             Normalized transformation matrix P.
+#         L : torch.Tensor of shape (input_dim, num_clusters)
+#             Binarized mapping matrix L.
+#         A : torch.Tensor of shape (input_dim, input_dim)
+#             Antisymmetric matrix A.
+#         """
+#         # Compute antisymmetric part
+#         A_skew = self.A_raw - self.A_raw.t()
+#         # Add diagonal matrix D
+#         A = A_skew + torch.diag(self.D)
+#         # Compute transformation P
+#         P = torch.matrix_exp(A)
+#         # Normalize columns of P to have unit norm
+#         P_norm = P #/ torch.norm(P, dim=0, keepdim=True).detach()
+#         # Transform input (already unit normalized)
+#         psi = X @ P_norm  # Shape: [n_samples, input_dim]
+#         prob = psi ** 2  # Element-wise square
+#         # Compute L using sigmoid
+#         L = torch.sigmoid(self.temp * self.L_raw)
+#         # Apply STE to binarize L
+#         L_hard = (L >= 0.5).float()
+#         L = (L_hard - L).detach() + L
+#         # Compute class scores
+#         class_scores = prob @ L  # Shape: [n_samples, num_clusters]
+#         return class_scores, P_norm, L, A
+
 class ECAModel(nn.Module):
     """Neural network model for Eigencomponent Analysis.
     
@@ -35,7 +102,44 @@ class ECAModel(nn.Module):
 
         self.num_parameters = input_dim * (input_dim + 1) / 2 + input_dim + input_dim * num_clusters
         self.temp = temp
-
+    
+    @property
+    def P(self):
+        """Compute the transformation matrix P.
+        
+        Returns
+        -------
+        P_norm : torch.Tensor
+            Normalized transformation matrix P.
+        """
+        # Compute antisymmetric part
+        A_skew = self.A_raw - self.A_raw.t()
+        # Add diagonal matrix D
+        self.A = A_skew + torch.diag(self.D)
+        # Compute transformation P
+        P = torch.matrix_exp(self.A)
+        # Normalize columns of P to have unit norm
+        P_norm = P  # / torch.norm(P, dim=0, keepdim=True).detach()
+        
+        return P_norm
+    
+    @property
+    def L(self):
+        """Compute the mapping matrix L.
+        
+        Returns
+        -------
+        L : torch.Tensor
+            Binarized mapping matrix L.
+        """
+        # Compute L using sigmoid
+        L_soft = torch.sigmoid(self.temp * self.L_raw)
+        # Apply STE to binarize L
+        L_hard = (L_soft >= 0.5).float()
+        L = (L_hard - L_soft).detach() + L_soft
+        
+        return L
+        
     def forward(self, X):
         """Forward pass through the model.
         
@@ -55,26 +159,16 @@ class ECAModel(nn.Module):
         A : torch.Tensor of shape (input_dim, input_dim)
             Antisymmetric matrix A.
         """
-        # Compute antisymmetric part
-        A_skew = self.A_raw - self.A_raw.t()
-        # Add diagonal matrix D
-        A = A_skew + torch.diag(self.D)
-        # Compute transformation P
-        P = torch.matrix_exp(A)
-        # Normalize columns of P to have unit norm
-        P_norm = P #/ torch.norm(P, dim=0, keepdim=True).detach()
+        
+        P = self.P
+        L = self.L
+
         # Transform input (already unit normalized)
-        psi = X @ P_norm  # Shape: [n_samples, input_dim]
+        psi = X @ P  # Shape: [n_samples, input_dim]
         prob = psi ** 2  # Element-wise square
-        # Compute L using sigmoid
-        L = torch.sigmoid(self.temp * self.L_raw)
-        # Apply STE to binarize L
-        L_hard = (L >= 0.5).float()
-        L = (L_hard - L).detach() + L
         # Compute class scores
         class_scores = prob @ L  # Shape: [n_samples, num_clusters]
-        return class_scores, P_norm, L, A
-
+        return class_scores, P, L, self.A
 
 class ECA(BaseEigenAnalysis):
     """Eigencomponent Analysis for classification and clustering.
