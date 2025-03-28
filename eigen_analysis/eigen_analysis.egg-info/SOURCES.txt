@@ -1,0 +1,7 @@
+README.md
+setup.py
+eigen_analysis.egg-info/PKG-INFO
+eigen_analysis.egg-info/SOURCES.txt
+eigen_analysis.egg-info/dependency_links.txt
+eigen_analysis.egg-info/requires.txt
+eigen_analysis.egg-info/top_level.txt
