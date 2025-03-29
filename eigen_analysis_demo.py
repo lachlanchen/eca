@@ -72,7 +72,10 @@ def run_clustering_demo():
     print("\n==== ECA Clustering Demo ====")
     
     # Generate synthetic data with 3 clusters
-    X, y_true = make_blobs(n_samples=300, centers=3, random_state=42)
+    # X, y_true = make_blobs(n_samples=300, centers=3, random_state=42)
+    iris = load_iris()
+    X = iris.data
+    y_true = iris.target
     
     # Standardize features
     # scaler = StandardScaler()
