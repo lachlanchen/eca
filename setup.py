@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="eigen-analysis",  # Changed hyphen instead of underscore for PyPI
-    version="0.1.4",
+    version="0.1.3",
     packages=find_packages(),  # This will find the eigen_analysis package automatically
     install_requires=[
         "numpy>=1.18.0",
