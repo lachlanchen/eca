@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="eigen-analysis",  # Changed hyphen instead of underscore for PyPI
-    version="0.1.1",
+    version="0.1.2",
     packages=find_packages(),  # This will find the eigen_analysis package automatically
     install_requires=[
         "numpy>=1.18.0",
@@ -13,7 +13,7 @@ setup(
         "scipy>=1.6.0",
     ],
     author="Lachlan Chen",
-    author_email="lach@lazyingart.art",  # Fixed the email address format
+    author_email="lach@lazying_or_onlyideas.art",  # Fixed the email address format
     description="Eigen-Component Analysis for classification and clustering",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",

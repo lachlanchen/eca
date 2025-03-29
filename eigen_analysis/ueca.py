@@ -45,7 +45,8 @@ class UnsupervisedECAModel(nn.Module):
             Transformation matrix P (not normalized for UECA).
         """
         # Construct antisymmetric matrix A
-        A = self.A_raw - self.A_raw.t() + torch.diag(self.D)
+        A_skew = self.A_raw - self.A_raw.t()
+        A = A_skew + torch.diag(self.D)
         # Compute P = e^A
         P = torch.matrix_exp(A)
         # Note: In UECA, P is not normalized
@@ -89,6 +90,7 @@ class UnsupervisedECAModel(nn.Module):
         # Compute projection
         proj = X @ (P @ L)
         # Use raw projection for probabilities
+        # Squre is not necessary as softmax can regularize the direction of eigenvector
         prob = proj
         # Apply softmax to get probabilities
         probs = torch.softmax(prob, dim=1)
