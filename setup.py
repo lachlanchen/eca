@@ -13,7 +13,7 @@ setup(
         "scipy>=1.6.0",
     ],
     author="Lachlan Chen",
-    author_email="lach@lazying_or_onlyideas.art",  # Fixed the email address format
+    author_email="lach@lazyingoronlyideas.art",  # Fixed the email address format
     description="Eigen-Component Analysis for classification and clustering",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
