@@ -1,0 +1,16 @@
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+eigen_analysis/__init__.py
+eigen_analysis/base.py
+eigen_analysis/eca.py
+eigen_analysis/ueca.py
+eigen_analysis/utils.py
+eigen_analysis/version.py
+eigen_analysis/visualization.py
+eigen_analysis.egg-info/PKG-INFO
+eigen_analysis.egg-info/SOURCES.txt
+eigen_analysis.egg-info/dependency_links.txt
+eigen_analysis.egg-info/requires.txt
+eigen_analysis.egg-info/top_level.txt
