@@ -2,6 +2,8 @@
 
 A Python package for Eigen-Component Analysis (ECA) and Unsupervised Eigen-Component Analysis (uECA) for classification and clustering tasks without data centralization or standadization. ECA is a quantum theory-inspired linear model that provides interpretable feature-to-class mappings through eigenomponents.
 
+![ECA](ISCAS2025/iscasp-figures/fig3_v7.png)
+
 
 ## Features
 
