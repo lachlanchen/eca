@@ -4,7 +4,7 @@ Version: 0.1.2
 Summary: Eigen-Component Analysis for classification and clustering
 Home-page: https://github.com/lachlanchen/eca
 Author: Lachlan Chen
-Author-email: lach@lazying_or_onlyideas.art
+Author-email: lach@lazyingoronlyideas.art
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent

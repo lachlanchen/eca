@@ -23,7 +23,7 @@ def run_classification_demo():
     
     # Train ECA model for classification
     print("Training ECA model...")
-    eca = ECA(num_clusters=3, learning_rate=0.01, num_epochs=10000)
+    eca = ECA(num_clusters=3, learning_rate=0.001, num_epochs=10000)
     eca.fit(X, y)
     
     # Evaluate on training data
@@ -32,7 +32,7 @@ def run_classification_demo():
     print(f"Training accuracy: {training_accuracy:.4f}")
     
     # Generate some test data
-    np.random.seed(42)
+    np.random.seed(23)
     test_indices = np.random.choice(len(X), size=int(0.2*len(X)), replace=False)
     X_test = X[test_indices]
     y_test = y[test_indices]
