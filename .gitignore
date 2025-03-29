@@ -1,2 +1,44 @@
+# Repository-specific files
 repository_concatenated.txt
 *.old
+
+# macOS system files
+.DS_Store
+._*
+
+# Byte-compiled / optimized files and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging artifacts
+build/
+dist/
+*.egg-info/
+
+# Virtual environment directories (adjust if needed)
+.env
+.venv
+env/
+venv/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Log files
+*.log
+
