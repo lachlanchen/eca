@@ -73,10 +73,10 @@ X = iris.data
 y = iris.target
 
 # Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Create and train ECA model
-eca = ECA(num_clusters=3, num_epochs=10000, learning_rate=0.01)
+eca = ECA(num_clusters=3, num_epochs=10000, learning_rate=0.001)
 eca.fit(X_train, y_train)
 
 # Make predictions
