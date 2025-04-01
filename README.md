@@ -195,7 +195,7 @@ visualize_mnist_eigenfeatures(eca.model_, output_dir='mnist_results')
 ### ECA Model (Supervised)
 
 - `num_clusters`: Number of classes
-- `learning_rate`: Learning rate for optimizer (default: 0.01)
+- `learning_rate`: Learning rate for optimizer (default: 0.001)
 - `num_epochs`: Number of training epochs (default: 1000)
 - `temp`: Temperature parameter for sigmoid (default: 10.0)
 - `random_state`: Random seed for reproducibility
